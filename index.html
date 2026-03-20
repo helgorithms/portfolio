@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Content & Marketing</title>
+<!-- 
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HOW TO EDIT THIS FILE                                      ║
+  ║                                                              ║
+  ║  1. Open in any text editor (VS Code, Sublime, Notepad++)   ║
+  ║  2. Search for "EDIT:" to find all editable sections        ║
+  ║  3. Replace placeholder text with your real info            ║
+  ║  4. Save and re-upload to GitHub Pages / Netlify            ║
+  ║                                                              ║
+  ║  To add your CV: replace the href="#" in the CV button      ║
+  ║  with a Google Drive link or relative path like "cv.pdf"    ║
+  ║                                                              ║
+  ║  To add the impact report PDF: place the PDF in the same    ║
+  ║  folder as this HTML and it will link automatically,        ║
+  ║  or replace the href with a hosted URL.                     ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-card: #111111;
+    --bg-card-hover: #161616;
+    --text: #e8e8e8;
+    --text-muted: #777777;
+    --accent: #c8ff00;
+    --accent-dim: rgba(200, 255, 0, 0.08);
+    --border: #222222;
+    --radius: 12px;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  body {
+    background: var(--bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .logo { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+  nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+  nav .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em; transition: color 0.3s; }
+  nav .nav-links a:hover { color: var(--text); }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 5rem; }
+  .hero-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .hero h1 strong { font-weight: 700; color: var(--accent); }
+  .hero-intro { max-width: 580px; font-size: 1.1rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+
+  .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s; flex-wrap: wrap; }
+  .hero-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.03em; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+  .hero-btn--primary { background: var(--accent); color: var(--bg); }
+  .hero-btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(200, 255, 0, 0.2); }
+  .hero-btn--secondary { border: 1px solid var(--border); color: var(--text); background: transparent; }
+  .hero-btn--secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-meta { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+  .hero-meta .stat-label { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .hero-meta .stat-value { font-size: 1.05rem; font-weight: 500; }
+
+  .section { padding: 6rem 0; }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; }
+  .section-number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; }
+  .section-title { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .projects-grid { display: grid; gap: 1.5rem; }
+
+  .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; transition: all 0.4s ease; position: relative; overflow: hidden; }
+  .project-card:hover { background: var(--bg-card-hover); border-color: #333; transform: translateY(-2px); }
+  .project-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.4s; }
+  .project-card:hover::after { opacity: 0.6; }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+  .card-category { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); padding: 0.3rem 0.75rem; border-radius: 100px; border: 1px solid rgba(200, 255, 0, 0.12); }
+  .card-year { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
+  .card-title { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  .card-client { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .card-description { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .card-highlights { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .card-highlight { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); background: var(--accent-dim); padding: 0.3rem 0.75rem; border-radius: 6px; border: 1px solid rgba(200, 255, 0, 0.08); }
+
+  .card-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .card-link { font-size: 0.78rem; color: var(--text); text-decoration: none; padding: 0.4rem 0.9rem; border: 1px solid var(--border); border-radius: 100px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.35rem; }
+  .card-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .card-link .arrow { font-size: 0.65rem; transition: transform 0.3s; }
+  .card-link:hover .arrow { transform: translateX(2px) translateY(-2px); }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .skill-item { background: var(--bg-card); padding: 1.75rem; transition: background 0.3s; }
+  .skill-item:hover { background: var(--bg-card-hover); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .skill-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.35rem; }
+  .skill-detail { font-size: 0.8rem; color: var(--text-muted); font-weight: 300; }
+
+  .contact-section { text-align: center; padding: 8rem 0; }
+  .contact-section h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .contact-section p { color: var(--text-muted); font-size: 1.05rem; font-weight: 300; margin-bottom: 2.5rem; }
+  .contact-btn { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem; background: var(--accent); color: var(--bg); text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.05em; border-radius: 100px; transition: all 0.3s; }
+  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(200, 255, 0, 0.2); }
+
+  footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
+  footer p { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.05em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 1.25rem; }
+    nav { padding: 1rem 1.25rem; }
+    nav .nav-links { gap: 1.25rem; }
+    nav .nav-links a { font-size: 0.75rem; }
+    .hero-meta { flex-wrap: wrap; gap: 2rem; }
+    .project-card { padding: 1.75rem; }
+    .card-title { font-size: 1.25rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 1.5rem; }
+    .hero-actions { flex-direction: column; }
+    .hero-btn { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     EDIT: NAVIGATION — change "Your Name" to your real name
+     ============================================================ -->
+<nav>
+  <div class="logo">Your Name</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     EDIT: HERO — name, tagline, intro text, email, CV link
+     ============================================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-label">Content · Marketing · Strategy</div>
+    <h1>I make brands <strong>visible</strong><br>and stories <strong>stick</strong>.</h1>
+    <p class="hero-intro">
+      Freelance content strategist and producer with experience across B2B SaaS, live events, sustainability, and real estate. I create social media campaigns, video content, editorial copy, and brand narratives — from concept through execution.
+    </p>
+
+    <!-- EDIT: Replace "your@email.com" and "#" (CV link) -->
+    <div class="hero-actions">
+      <a href="mailto:your@email.com" class="hero-btn hero-btn--primary">Get in touch →</a>
+      <a href="#" class="hero-btn hero-btn--secondary">Download CV ↓</a>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <div class="stat-label">Reach</div>
+        <div class="stat-value">100K+ views on single posts</div>
+      </div>
+      <div>
+        <div class="stat-label">Growth</div>
+        <div class="stat-value">550% follower increase (18 mo.)</div>
+      </div>
+      <div>
+        <div class="stat-label">Scope</div>
+        <div class="stat-value">DE · CH · International</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDIT: PROJECTS — each card is a self-contained block.
+     Copy a card block to add more, or delete one to remove.
+     ============================================================ -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <span class="section-title">Selected Work</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="projects-grid">
+
+      <!-- ── PROJECT: Event Space / Music Festival ── -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <span class="card-category">Event &amp; Entertainment</span>
+          <span class="card-year">2024 – present</span>
+        </div>
+        <h3 class="card-title">Event Space &amp; Music Festival</h3>
+        <p class="card-client">Content creation · Video production · Social media</p>
+        <p class="card-description">
+          Produced video and image content for an event space and music festival brand. Developed social media posts combining original video production with engaging copy — one reel surpassing 100K views organically.
+        </p>
+        <div class="card-highlights">
+          <span class="card-highlight">↗ 100K+ organic views</span>
+          <span class="card-highlight">Video + image content</span>
+        </div>
+        <div class="card-links">
+          <a href="https://www.instagram.com/reel/DL2fBkwN8u4/" target="_blank" rel="noopener" class="card-link">Reel — 100K+ views <span class="arrow">↗</span></a>
+          <a href="https://www.instagram.com/p/DKPfE5HovuK/" target="_blank" rel="noopener" class="card-link">Image post <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <!-- ── PROJECT: B2B SaaS — Synopsys / PikeTec ── -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <span class="card-category">B2B SaaS</span>
+          <span class="card-year">2020 – 2022</span>
+        </div>
+        <h3 class="card-title">Synopsys Automotive Testing</h3>
+        <p class="card-client">Formerly PikeTec GmbH · Acquired by Synopsys LLC</p>
+        <p class="card-description">
+          Managed and scaled the company's LinkedIn presence from 200 to 1,300+ followers within 18 months. Produced video content including product releases, tutorials, and an employer branding campaign. Authored technical blog articles on software testing topics like MC/DC coverage and traceability.
+        </p>
+        <div class="card-highlights">
+          <span class="card-highlight">↗ 200 → 1,300+ followers (+550%)</span>
+          <span class="card-highlight">Video · Editorial · Social</span>
+        </div>
+        <div class="card-links">
+          <a href="https://www.linkedin.com/posts/synopsys-automotive-testing_release-video-tpt-17-activity-6844597908394786817-Tvw8" target="_blank" rel="noopener" class="card-link">Product release video <span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/posts/synopsys-automotive-testing_tutorial-first-steps-with-testing-tool-tpt-activity-6869635249953894400--Web" target="_blank" rel="noopener" class="card-link">Tutorial video <span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/posts/synopsys-automotive-testing_life-at-piketec-come-work-with-activity-6864511286160437248-ddRJ" target="_blank" rel="noopener" class="card-link">Employer branding <span class="arrow">↗</span></a>
+          <a href="https://www.linkedin.com/company/synopsys-automotive-testing" target="_blank" rel="noopener" class="card-link">LinkedIn page <span class="arrow">↗</span></a>
+          <a href="https://web.archive.org/web/20220702025552/https://piketec.com/traceability-ibm-rqm/" target="_blank" rel="noopener" class="card-link">Blog: Traceability <span class="arrow">↗</span></a>
+          <a href="https://web.archive.org/web/20220702025136/https://piketec.com/mc-dc-struggle-reaching-100-percent/" target="_blank" rel="noopener" class="card-link">Blog: MC/DC coverage <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <!-- ── PROJECT: SPRK Impact Report ── -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <span class="card-category">Impact &amp; Sustainability</span>
+          <span class="card-year">2023 – 2024</span>
+        </div>
+        <h3 class="card-title">SPRK.global — Impact Report 2023</h3>
+        <p class="card-client">SPRK.global GmbH · Berlin-based food redistribution platform</p>
+        <p class="card-description">
+          Co-authored the annual impact report for SPRK.global, a B2B food surplus redistribution platform tackling supply chain food waste. The 20-page report communicates economic, ecological, and social impact metrics — including 3,100 tons of redistributed food (+87% YoY) and 7,625 tons of CO₂ equivalent saved. Structured around ESG dimensions and aligned with UN Sustainable Development Goals (SDG 2, 12, 13, 17).
+        </p>
+        <div class="card-highlights">
+          <span class="card-highlight">3,100t food redistributed</span>
+          <span class="card-highlight">7,625t CO₂ eq. saved</span>
+          <span class="card-highlight">ESG · SDG reporting</span>
+        </div>
+        <div class="card-links">
+          <!-- EDIT: If hosting the PDF separately, replace the href below -->
+          <a href="SPRK-Impact-Report-2023.pdf" target="_blank" rel="noopener" class="card-link">Download report (PDF) <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <!-- ── PROJECT: Real Estate / ESG PR ── -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <span class="card-category">PR &amp; Thought Leadership</span>
+          <span class="card-year">2024</span>
+        </div>
+        <h3 class="card-title">ESG Narrative — Real Estate Sector</h3>
+        <p class="card-client">Swiss parking technology startup · Published article</p>
+        <p class="card-description">
+          Developed an ESG-focused narrative for a startup in the parking technology sector and secured publication in Immobilien Business, a leading Swiss real estate trade publication. The piece positions parking infrastructure as a central driver of property returns and sustainability performance.
+        </p>
+        <div class="card-highlights">
+          <span class="card-highlight">Published in trade media</span>
+          <span class="card-highlight">ESG narrative development</span>
+        </div>
+        <div class="card-links">
+          <a href="https://www.immobilienbusiness.ch/de/publireportage/2024-09-05/parkflaechen-als-zentraler-renditetreiber/" target="_blank" rel="noopener" class="card-link">Published article (DE) <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <!-- ── PROJECT: ChatBundestag ── -->
+      <div class="project-card reveal">
+        <div class="card-top">
+          <span class="card-category">Tech &amp; Product</span>
+          <span class="card-year">2024 – present</span>
+        </div>
+        <h3 class="card-title">ChatBundestag — AI/NLP Web App</h3>
+        <p class="card-client">Independent project · Frontend design + development</p>
+        <p class="card-description">
+          Designed and developed a web application for querying and analyzing German parliamentary debate data using NLP and vector search. Responsible for frontend design, branding, logo, and UX — alongside the AI/search infrastructure. Demonstrates cross-disciplinary range at the intersection of content, design, and technology.
+        </p>
+        <div class="card-highlights">
+          <span class="card-highlight">Deployed web app</span>
+          <span class="card-highlight">UI/UX + logo design</span>
+          <span class="card-highlight">NLP · AI</span>
+        </div>
+        <div class="card-links">
+          <a href="https://chatbundestag.streamlit.app" target="_blank" rel="noopener" class="card-link">Live app (WIP) <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDIT: SKILLS — change names and descriptions as needed
+     ============================================================ -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">What I Do</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-icon">◉</div>
+        <div class="skill-name">Social Media Management</div>
+        <div class="skill-detail">Strategy, content calendars, community growth, analytics</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">▶</div>
+        <div class="skill-name">Video Production</div>
+        <div class="skill-detail">Concept to final cut — reels, tutorials, brand films</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">✎</div>
+        <div class="skill-name">Copywriting &amp; Editorial</div>
+        <div class="skill-detail">Blog articles, social copy, impact reports, technical writing</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">◆</div>
+        <div class="skill-name">Brand &amp; Visual Identity</div>
+        <div class="skill-detail">Visual narratives, logo design, brand guidelines</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">⬡</div>
+        <div class="skill-name">Content Strategy</div>
+        <div class="skill-detail">Audience research, channel strategy, campaign planning</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">◈</div>
+        <div class="skill-name">PR &amp; Thought Leadership</div>
+        <div class="skill-detail">ESG narratives, media placements, stakeholder communications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDIT: CONTACT — change email address
+     ============================================================ -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <h2>Let's work together.</h2>
+    <p>Open for freelance projects in content, marketing, and brand strategy.</p>
+    <!-- EDIT: Replace "your@email.com" -->
+    <a href="mailto:your@email.com" class="contact-btn">Get in touch <span>→</span></a>
+  </div>
+</section>
+
+<!-- EDIT: Footer — replace "Your Name" -->
+<footer>
+  <div class="container">
+    <p>© 2025 Your Name · Portfolio</p>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
